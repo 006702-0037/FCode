@@ -45,21 +45,31 @@
 ''' 
 from math import ceil
 
+def max_value(bases, channel_order):
+  sum=1
+  for i in range(len(bases)):
+    if i in channel_order:
+      sum *= bases[i]
+  return sum-1
 
-def color_seq(val, codex, channel_order, max=256):
-  colors=[0,0,0]
-  bases=[ceil(max/codex[0]),ceil(max/codex[1]),ceil(max/codex[2])]
+def color_seq(val, codex, channel_order, max=256, amnt=3):
+  colors=[0 for k in range(amnt)]
+  bases=[ceil(max/num) for num in codex]
+  
+  high=max_value(bases, channel_order)
+  if val>high:
+    return val-high
 
   for n in range(len(colors)):
-    for i in range(len(colors)):
-      if channel_order[i]==n:
-        colors[i]=int(val%bases[n])*codex[n]
+    if n in channel_order:
+      for i in range(len(colors)):
+        if channel_order[i]==n:
+          colors[i]=int(val%bases[n])*codex[n]
         
-    val //= bases[n]
-    
+      val //= bases[n]
     if val == 0:
-      return colors
+      break
 
-  return val
+  return colors
 
 print(color_seq(3, [255,20,30], [0,1,0]))

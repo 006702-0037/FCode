@@ -72,4 +72,5 @@ def color_seq(val, codex, channel_order, max=256, amnt=3):
 
   return colors
 
-print(color_seq(3, [255,20,30], [0,1,0]))
+if __name__ == "__main__":
+  print(color_seq(3, [255,20,30], [0,1,0]))

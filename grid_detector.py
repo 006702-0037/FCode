@@ -1,6 +1,10 @@
 import numpy as np
 import cv2
 
+
+# This function takes an image (image) and range of potential
+# barcode colors (color ranges) and filters them for sqaures
+# using a mask and polygonal approximation of its contours
 def detectColorSquares(image, color_ranges, min_size=500):
   contour_list=[]
   for lower,upper in color_ranges:  
@@ -12,6 +16,8 @@ def detectColorSquares(image, color_ranges, min_size=500):
       epsilon = 0.01*cv2.arcLength(c, True)
       approx = cv2.approxPolyDP(c,epsilon,True)
       
+      # Given the contour contains four verticies (square) and 
+      # is of signifigant size, we consider it a barcode region
       if len(approx)==4 and cv2.contourArea(approx) > min_size:
         contour_list.append([approx])
   return contour_list

@@ -19,7 +19,7 @@ def detectColorSquares(image, color_ranges, min_size=500):
       # Given the contour contains four verticies (square) and 
       # is of signifigant size, we consider it a barcode region
       if len(approx)==4 and cv2.contourArea(approx) > min_size:
-        contour_list.append([approx])
+        contour_list.append(approx)
   return contour_list
 
 if __name__ == "__main__":
@@ -34,5 +34,5 @@ if __name__ == "__main__":
   detected = detectColorSquares(image, mask_ranges)
 
   for shape in detected:
-    cv2.drawContours(orig, shape, -1, (255,0,0), line_size)
+    cv2.drawContours(orig, [shape], -1, (255,0,0), line_size)
   cv2.imwrite('out.png',orig)

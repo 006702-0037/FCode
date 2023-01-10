@@ -1,13 +1,6 @@
 import numpy as np
 import cv2
 
-image = cv2.imread('sample.jpg')
-orig = image.copy()
-image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-line_size = 5
-mask_count=5000
-
 def detectColorSquares(image, color_ranges, min_size=500):
   contour_list=[]
   for lower,upper in color_ranges:  
@@ -23,10 +16,17 @@ def detectColorSquares(image, color_ranges, min_size=500):
         contour_list.append([approx])
   return contour_list
 
+if __name__ == "__main__":
+  image = cv2.imread('sample.jpg')
+  orig = image.copy()
+  image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-mask_ranges = np.random.randint(0,255,(mask_count,2,3))
-detected = detectColorSquares(image, mask_ranges)
+  line_size = 5
+  mask_count=5000
 
-for shape in detected:
-  cv2.drawContours(orig, shape, -1, (255,0,0), line_size)
-cv2.imwrite('out.png',orig)
+  mask_ranges = np.random.randint(0,255,(mask_count,2,3))
+  detected = detectColorSquares(image, mask_ranges)
+
+  for shape in detected:
+    cv2.drawContours(orig, shape, -1, (255,0,0), line_size)
+  cv2.imwrite('out.png',orig)

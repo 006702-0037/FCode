@@ -57,4 +57,4 @@ if __name__ == "__main__":
   print(returned)
   print()
   print(f"pixel count - {len(returned)}")
-print(decoded)
+  print(decoded)

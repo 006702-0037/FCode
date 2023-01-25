@@ -1,19 +1,9 @@
-def num_lookup_bit(num):
-    x = 2
-    bits = ''
-    while num >= 0:
-        bits += '0' if num%x < x/2 else '1'
-        num -= x
-        x *= 2
-    return bits
+def num_lookup_bit(val):
+    return bin(val+2)[3:][::-1]
 
 def bit_lookup_num(bits):
-    x = 2
-    num = 0
-    for b in bits:
-        num += x//2 if b == '0' else x
-        x *= 2
-    return num-1
+    binary = '1' + bits[::-1]
+    return int(binary, 2) - 2
 
 def text_to_bits(text):
     bits = bin(int.from_bytes(text.encode(), 'big'))[2:]
@@ -22,6 +12,9 @@ def text_to_bits(text):
 def bits_to_text(bits):
     n = int(''.join(bits), 2)
     return n.to_bytes((n.bit_length() + 7) // 8, 'big').decode()
+
+def decode_bin(nums):
+  return [num_lookup_bit(i) for i in nums]
 
 def encode_bin(bin, max_val):
   start=0
@@ -32,9 +25,6 @@ def encode_bin(bin, max_val):
       start=i-1
   out.append(bit_lookup_num("".join(bin[start:len(bin)])))
   return out
-
-def decode_bin(nums):
-  return [num_lookup_bit(i) for i in nums]
 
 if __name__ == "__main__":
     max_val=8

@@ -1,5 +1,5 @@
 def num_lookup_bit(val):
-    return bin(val+2)[3:][::-1]
+    return bin(val+2)[:2:-1]
 
 def bit_lookup_num(bits):
     binary = '1' + bits[::-1]

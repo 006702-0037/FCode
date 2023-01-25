@@ -1,26 +1,20 @@
-from itertools import product
 
-def bit_lookup_num(lookup):
-  if lookup == '':
-    return -1
-    
-  bits=[]
-  current_len=1
-  while lookup not in bits:
-    bits.extend(["".join(perm[::-1]) for perm in product(["0","1"],repeat=current_len)])
-    current_len+=1
-  return bits.index(lookup)
+def num_lookup_bit(num):
+    x = 2
+    bits = ''
+    while num >= 0:
+        bits += '0' if num%x < x/2 else '1'
+        num -= x
+        x *= 2
+    return bits
 
-def num_lookup_bit(lookup):
-  if lookup == -1:
-    return ''
-    
-  bits=[]
-  current_len=1
-  while len(bits)-1<lookup:
-    bits.extend(["".join(perm[::-1]) for perm in product(["0","1"],repeat=current_len)])
-    current_len+=1
-  return bits[lookup]
+def bit_lookup_num(bits):
+    x = 2
+    num = 0
+    for b in bits:
+        num += x//2 if b == '0' else x
+        x *= 2
+    return num-1
 
 def text_to_bits(text):
     bits = bin(int.from_bytes(text.encode(), 'big'))[2:]

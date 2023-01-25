@@ -23,7 +23,13 @@ def encode_bin(bin, max_val):
     if bit_lookup_num("".join(bin[start:i]))>max_val:
       out.append(bit_lookup_num("".join(bin[start:i-1])))
       start=i-1
-  out.append(bit_lookup_num("".join(bin[start:len(bin)])))
+        
+  if bit_lookup_num("".join(bin[start:]))>max_val:
+    out.append(bit_lookup_num("".join(bin[start:len(bin)-1])))
+    out.append(bit_lookup_num("".join(bin[len(bin)-1:])))
+  else:
+    out.append(bit_lookup_num("".join(bin[start:])))
+    
   return out
 
 if __name__ == "__main__":

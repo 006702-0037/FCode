@@ -1,8 +1,8 @@
 def num_lookup_bit(val):
-    return bin(val+2)[:2:-1]
+    return bin(val+2)[3:]
 
 def bit_lookup_num(bits):
-    binary = '1' + bits[::-1]
+    binary = '1' + bits
     return int(binary, 2) - 2
 
 def text_to_bits(text):

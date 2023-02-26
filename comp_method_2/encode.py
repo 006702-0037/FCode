@@ -53,9 +53,16 @@ def max_value(bases, channel_order):
       sum *= bases[i]
   return sum-1
 
-def color_seq(val, codex, channel_order, channel_num=3, max=256):
+def color_seq(cval, ccodex, cchannel_order, max=256):
+
+  val = int(cval)
+  codex = list(ccodex)
+  channel_order = list(cchannel_order)
   
-  colors=[0]*channel_num
+  assert len(codex)==len(channel_order)
+  codex_len = len(codex)
+  
+  colors=[0]*len(codex)
   bases=[ceil(max/num) for num in codex]
   high=max_value(bases, channel_order)
   pix_cnt = ceil(log(val)/log(high+1))-1
@@ -79,14 +86,14 @@ def color_seq(val, codex, channel_order, channel_num=3, max=256):
     if val == 0:
       break
       
-  return [colors[i:i + channel_num] for i in range(0, len(colors), channel_num)]
+  return [colors[i:i + codex_len] for i in range(0, len(colors), codex_len)]
 
 
 if __name__ == "__main__":  
-  test_num = 123456789
+  test_num = 22517
   
-  test_codex = [1,1,1]
-  test_order = [0,1,2]
+  test_codex = [5,3,5]
+  test_order = [0,2,1]
 
   print(f"encoded number: \"{test_num}\"")
   

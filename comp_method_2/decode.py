@@ -5,7 +5,7 @@ def dec_color_seq(vals, codex, channel_order, max_val=256):
 
   assert len(codex)==len(channel_order)
   bases=[ceil(max_val/num) for num in codex]
-  high=max_value(bases, channel_order)+1
+  high=int(max_value(bases, channel_order))+1
   
   sum = 0
   for n in range(len(vals)):
@@ -16,9 +16,10 @@ def dec_color_seq(vals, codex, channel_order, max_val=256):
     for i in range(len(channel_order)):
       if i in channel_order:
         pos=channel_order.index(i)
-        total+=(color[pos]/codex[i])*mult
+        total+=int(color[pos]/codex[i])*mult
         mult*=bases[i]
     sum+=total*(high**n)
+    
   return int(sum)
     
   

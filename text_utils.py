@@ -4,6 +4,10 @@ def text_to_num(text, format='utf-8', endian='big'):
 def num_to_text(num, format='utf-8', endian='big'):
   return num.to_bytes((num.bit_length() + 7) // 8, endian).decode(format)
 
+def num_to_bits(num):
+    return "".join([x for x in '{:08b}'.format(num)])
+
+
 if __name__ == "__main__":
   example = "common bingus w"
 

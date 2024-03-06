@@ -46,10 +46,9 @@ def get_best_codex_for_delta_e(de, order=(0,1,2)):
 
         bad = False
         if max_num > best:
-            colors = color_seq(1, codex, order)
-            colors[0] = rgb_to_lab(colors[0])
+            colors = [[0,0,0]]
 
-            for i in range(2, max_num + 1):
+            for i in range(1, max_num + 1):
                 current_rgb = color_seq(i, codex, order)[0]
                 current_lab = rgb_to_lab(current_rgb)
 

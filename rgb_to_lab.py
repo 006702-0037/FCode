@@ -67,24 +67,19 @@ def get_best_codex_for_delta_e(de, order=(0,1,2)):
             best = max_num
             best_codex=list(codex)
 
-        else:
-            if codex[0] == 255:
-                codex[0] = 1
-                if codex[1] == 255:
-                    codex[1] = 1
-                    if codex[2] == 255:
-                        #print("end", flush=True)
-                        return best_codex
-                    else:
-                        codex[2] += 1
-                        #if max_num <= best and not bad:
-                            #print(f"\nget better. L.\n{codex}", flush=True)
-                        #else:
-                            #print(f"\nruh roh\n{codex}", flush=True)
+        if codex[0] == 255:
+            codex[0] = 1
+            if codex[1] == 255:
+                codex[1] = 1
+                if codex[2] == 255:
+                    #print("end", flush=True)
+                    return best_codex
                 else:
-                    codex[1] += 1
+                    codex[2] += 1
             else:
-                codex[0] += 1
+                codex[1] += 1
+        else:
+            codex[0] += 1
 
 
 if __name__=="__main__":

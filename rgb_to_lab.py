@@ -13,8 +13,8 @@ def rgb_to_xyz(input_rgb):
 
 
 # wikipedia
-f_const = 6 / 29
-foo = lambda x: x ** (1 / 3) if x > f_const ** 3 else ((x / 3) * (f_const ** -2) + 4 / 29)
+def foo(x):
+    return x ** (1 / 3) if x > 216/24389 else ((x * (841/108)) + 4 / 29)
 
 
 def xyz_to_lab(input_xyz):
